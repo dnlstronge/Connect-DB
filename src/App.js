@@ -40,7 +40,10 @@ function App() {
   }, [fetchMoviesHandler]);
 
   function addMovieHandler(movie) {
-    console.log(movie);
+    // post here using fetch
+    fetch("https://connectdb-1efa3-default-rtdb.europe-west1.firebasedatabase.app/movies.json", {
+      method: "POST"
+    })
   }
 
   let content = <p>Found no movies.</p>;
