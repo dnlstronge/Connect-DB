@@ -39,10 +39,14 @@ function App() {
     fetchMoviesHandler();
   }, [fetchMoviesHandler]);
 
-  function addMovieHandler(movie) {
+ async function addMovieHandler(movie) {
     // post here using fetch
-    fetch("https://connectdb-1efa3-default-rtdb.europe-west1.firebasedatabase.app/movies.json", {
-      method: "POST"
+    const response = await fetch("https://connectdb-1efa3-default-rtdb.europe-west1.firebasedatabase.app/movies.json", {
+      method: "POST",
+      body: JSON.stringify(movie),
+      headers: {
+        "Content-Type":"application/json"
+      }
     })
   }
 
