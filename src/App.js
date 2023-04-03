@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from "react";
 
-import MoviesList from './components/MoviesList';
-import AddMovie from './components/AddMovie';
-import './App.css';
+import MoviesList from "./components/MoviesList";
+import AddMovie from "./components/AddMovie";
+import "./App.css";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -13,9 +13,11 @@ function App() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch('https://connectdb-1efa3-default-rtdb.europe-west1.firebasedatabase.app/movies.json');
+      const response = await fetch(
+        "https://connectdb-1efa3-default-rtdb.europe-west1.firebasedatabase.app/movies.json"
+      );
       if (!response.ok) {
-        throw new Error('Something went wrong!');
+        throw new Error("Something went wrong!");
       }
 
       const data = await response.json();
@@ -27,11 +29,10 @@ function App() {
           id: key,
           title: data[key].title,
           openingText: data[key].openingText,
-          releaseDate: data[key].releaseDate
-        })
+          releaseDate: data[key].releaseDate,
+        });
       }
 
-      
       setMovies(loadedMovies);
     } catch (error) {
       setError(error.message);
@@ -43,17 +44,20 @@ function App() {
     fetchMoviesHandler();
   }, [fetchMoviesHandler]);
 
- async function addMovieHandler(movie) {
+  async function addMovieHandler(movie) {
     // post here using fetch
-    const response = await fetch("https://connectdb-1efa3-default-rtdb.europe-west1.firebasedatabase.app/movies.json", {
-      method: "POST",
-      body: JSON.stringify(movie),
-      headers: {
-        "Content-Type":"application/json"
+    const response = await fetch(
+      "https://connectdb-1efa3-default-rtdb.europe-west1.firebasedatabase.app/movies.json",
+      {
+        method: "POST",
+        body: JSON.stringify(movie),
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    })
-    const data = await response.json()
-    console.log(data)
+    );
+    const data = await response.json();
+    console.log(data);
   }
 
   let content = <p>Found no movies.</p>;
